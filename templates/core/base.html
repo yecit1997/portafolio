@@ -1,3 +1,5 @@
+{% load static %}
+
 <!doctype html>
 <html lang="es">
     <head>
@@ -16,13 +18,26 @@
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
             crossorigin="anonymous"
         />
+        <link rel="stylesheet" href=" {% static 'css/style.css' %} " />
+        
+        {% block style %}
+            
+        {% endblock style %}
+            
     </head>
     {% include 'core/navbar.html' %}
 
-    <body>
+    <body >
         <header>
             <!-- place navbar here -->
         </header>
-        <main></main>
+        <main class="container">
+            
+            {% block content %}
+                
+            {% endblock content %}
+                
+
+        </main>
 
 {% include 'core/footer.html' %}
