@@ -35,3 +35,16 @@
         grid-template-columns: 1fr;
     }
 }
+
+.image-container {
+    margin: 10px;
+    overflow: hidden; /* Para que el efecto de escala no se salga del contenedor */
+}
+
+.image-container img {
+    transition: transform 0.3s ease-in-out; /* Transición suave para el efecto */
+}
+
+.image-container:hover img {
+    transform: scale(1.1); /* Escala la imagen al 110% al hacer hover */
+}

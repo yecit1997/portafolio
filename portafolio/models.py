@@ -1,7 +1,5 @@
 from django.db import models
 
-
-
 class Tecnologias(models.Model):
     nombre = models.CharField(max_length=50)
     imagen = models.ImageField(upload_to='tecnologias')
@@ -12,8 +10,6 @@ class Tecnologias(models.Model):
         
     def __str__(self) -> str:
         return self.nombre
-
-
 
 class Proyectos(models.Model):
     nombre = models.CharField(max_length=50)

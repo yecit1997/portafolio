@@ -1,3 +1,5 @@
 body {
-    background-color: azure;
+    background: linear-gradient(to bottom right, #f0f8ff, #d4e6f1); /* Degradado suave de azure a azul claro */
+    color: #555;
+    font-family: 'Open Sans', sans-serif; /* Ejemplo de fuente */
 }
