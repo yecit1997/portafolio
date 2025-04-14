@@ -8,78 +8,28 @@
 
   <div class="container mb-5 mt-5">
     <div class="card-container">
-      <div>
-        <div class="card">
-          <img src="" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">Nombre del proyecto</h5>
-            <p class="card-text">Descripción del proyecto</p>
-            <div class="tecnologia">
-              <img src="{% static 'img/python.png' %}" style="width:40px; height:40px;" alt="tecnología"/>
-              <img src="{% static 'img/python.png' %}" style="width:40px; height:40px;" alt="tecnología"/>
-              <img src="{% static 'img/python.png' %}" style="width:40px; height:40px;" alt="tecnología"/>
-              <img src="{% static 'img/python.png' %}" style="width:40px; height:40px;" alt="tecnología"/>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-0">
-            <a class="btn btn-sm btn-secondary btn-custom" href=" # " role="button">Ver más</a>
+      {% for proyecto in proyectos %}
+      <div class="card">
+        <img src=" {{proyecto.imagen.url}} " class="card-img-top img-fluid" alt="..."  style="width:100%; height:300px;"/>
+        <div class="card-body">
+          <h5 class="card-title">{{proyecto.nombre}}</h5>
+          <p class="card-text">{{proyecto.descripcion|truncatewords:20|linebreaksbr}}</p>
+          <div class="tecnologia" style="display: flex; align-items: center; gap: 1px;">
+            {% for tecnologia in proyecto.tecnologias.all %}
+              <img src="{{ tecnologia.imagen.url }}" class="rounded-circle" alt="{{ tecnologia.nombre }}" style="width: 30px; height: 30px;">
+            {% endfor %}
           </div>
         </div>
-      </div>
-      <div>
-        <div class="card">
-          <img src="" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">Nombre del proyecto</h5>
-            <p class="card-text">Descripción del proyecto</p>
-            <div class="tecnologia">
-              <img src="{% static 'img/python.png' %}" style="width:40px; height:40px;" alt="tecnología"/>
-              <img src="{% static 'img/python.png' %}" style="width:40px; height:40px;" alt="tecnología"/>
-              <img src="{% static 'img/python.png' %}" style="width:40px; height:40px;" alt="tecnología"/>
-              <img src="{% static 'img/python.png' %}" style="width:40px; height:40px;" alt="tecnología"/>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-0">
-            <a class="btn btn-sm btn-secondary btn-custom" href=" # " role="button">Ver más</a>
-          </div>
+        <div class="card-footer bg-transparent border-0">
+          <a class="btn btn-sm btn-secondary btn-custom" href=" {% url 'ver_proyecto' proyecto.id %} " role="button">Ver más</a>
         </div>
       </div>
-      <div>
-        <div class="card">
-          <img src="" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">Nombre del proyecto</h5>
-            <p class="card-text">Descripción del proyecto</p>
-            <div class="tecnologia">
-              <img src="{% static 'img/python.png' %}" style="width:40px; height:40px;" alt="tecnología"/>
-              <img src="{% static 'img/python.png' %}" style="width:40px; height:40px;" alt="tecnología"/>
-              <img src="{% static 'img/python.png' %}" style="width:40px; height:40px;" alt="tecnología"/>
-              <img src="{% static 'img/python.png' %}" style="width:40px; height:40px;" alt="tecnología"/>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-0">
-            <a class="btn btn-sm btn-secondary btn-custom" href=" # " role="button">Ver más</a>
-          </div>
-        </div>
+      {% empty %}
+      <div class="alert alert-info" role="alert">
+        No hay proyectos disponibles.
       </div>
-      <div>
-        <div class="card">
-          <img src="" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">Nombre del proyecto</h5>
-            <p class="card-text">Descripción del proyecto</p>
-            <div class="tecnologia">
-              <img src="{% static 'img/python.png' %}" style="width:40px; height:40px;" alt="tecnología"/>
-              <img src="{% static 'img/python.png' %}" style="width:40px; height:40px;" alt="tecnología"/>
-              <img src="{% static 'img/python.png' %}" style="width:40px; height:40px;" alt="tecnología"/>
-              <img src="{% static 'img/python.png' %}" style="width:40px; height:40px;" alt="tecnología"/>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-0">
-            <a class="btn btn-sm btn-secondary btn-custom" href=" # " role="button">Ver más</a>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
+  
 {% endblock %}

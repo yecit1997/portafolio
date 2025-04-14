@@ -13,7 +13,7 @@ class Tecnologias(models.Model):
 
 class Proyectos(models.Model):
     nombre = models.CharField(max_length=50)
-    descripcion = models.CharField(max_length=50)
+    descripcion = models.TextField()
     imagen = models.ImageField(upload_to='proyectos')
     tecnologias = models.ManyToManyField(Tecnologias, related_name='proyectos')
 
@@ -23,6 +23,11 @@ class Proyectos(models.Model):
 
     def __str__(self):
         return self.nombre
+    
+    def tecnologias_list(self):
+        return ", ".join([tecnologia.nombre for tecnologia in self.tecnologias.all()])
+
+    tecnologias_list.short_description = 'Tecnologías'
     
 
 

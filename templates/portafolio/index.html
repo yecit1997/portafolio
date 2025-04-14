@@ -1,9 +1,13 @@
 {% extends 'core/base.html' %}
+{% load static %}
+{% block style %}
+  <link rel="stylesheet" href=" {% static 'css/Proyectos.css' %} " />
+{% endblock %}
 
 
 {% block content %}
 
-{% include 'proyectos/proyectos.html' %}
+{% include 'proyectos/proyectos.html' with proyectos=proyectos tecnologias=tecnologias%}
 {% include 'tecnologias/tecnologias.html' %}
 
 

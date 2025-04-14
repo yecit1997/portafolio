@@ -3,13 +3,23 @@ from django.shortcuts import render, get_object_or_404
 from .models import Proyectos, Tecnologias
 
 
-
-def home(request):
-    return render(request, 'portafolio/index.html')
-
-
 def sobre_mi(request):
     return render(request, 'portafolio/sobremi.html')
+
+def home(request):
+    proyectos = Proyectos.objects.all()
+    tecnologias = Tecnologias.objects.all()
+    
+    context = {
+        'proyectos': proyectos,
+        'tecnologias': tecnologias,
+    }
+    return render(request, 'portafolio/index.html',context=context)
+
+
+def proyectos(request):
+    return render(request, 'proyectos/proyectos.html',)
+
 
 def ver_proyecto(request, proyecto_id):
     proyecto = get_object_or_404(Proyectos, id=proyecto_id)
@@ -19,3 +29,6 @@ def ver_proyecto(request, proyecto_id):
         'tecnologia': tecnologia,
     }
     return render(request, 'proyectos/ver_proyecto.html', context=context)
+
+
+
