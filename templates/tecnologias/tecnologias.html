@@ -1,12 +1,12 @@
 {% load static %}
 
 
-<h2>Tecnologías</h2>
-<div class="tecnologia mt-2 mb-5 center" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+<h2 class="text-center">Tecnologías</h2>
+<div class="tecnologia mt-2 mb-5 center mx-1 my-1" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
     
     {% for tecnologia in tecnologias %}
         <div class="image-container">
-            <img class="img-fluid rounded" src="{{tecnologia.imagen.url}}" style="width:100px; height:70px;" alt="tecnología"/>
+            <img class="img-fluid rounded" src="{{tecnologia.imagen.url}}" style="width:100px; height:90px;" alt="tecnología"/>
         </div>
     {% endfor %}
 </div>
