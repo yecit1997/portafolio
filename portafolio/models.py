@@ -30,7 +30,30 @@ class Proyectos(models.Model):
     tecnologias_list.short_description = 'Tecnologías'
     
 
+class Redes(models.Model):
+    nombre = models.CharField(max_length=50)
+    url = models.URLField()
+    icono = models.ImageField(upload_to='redes')
+
+    class Meta:
+        verbose_name = 'Red'
+        verbose_name_plural = 'Redes'
+
+    def __str__(self) -> str:
+        return self.nombre
 
 
+class SobreMi(models.Model):
+    nombre = models.CharField(max_length=50)
+    descripcion = models.TextField()
+    imagen = models.ImageField(upload_to='sobre_mi')
+    redes = models.ManyToManyField(Redes, related_name='redes', blank=True)
+
+    class Meta:
+        verbose_name = 'Sobre mi'
+        verbose_name_plural = 'Sobre mi'
+
+    def __str__(self) -> str:
+        return self.nombre
 
 

@@ -1,5 +1,8 @@
 body {
-    background: linear-gradient(to bottom right, #f0f8ff, #d4e6f1); /* Degradado suave de azure a azul claro */
-    color: #555;
-    font-family: 'Open Sans', sans-serif; /* Ejemplo de fuente */
+    background: linear-gradient(225deg, #424242, #212121); /* Inclinado a 225 grados */
+    color: #f5f5f5;
+    font-family: monospace; /* Una fuente monoespaciada puede evocar código */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
 }
