@@ -3,7 +3,7 @@
 
 {% block content %}
     
-<div class="mt-5 mb-5" style="display: flex; justify-content: center;">
+{% comment %} <div class="mt-5 mb-5" style="display: flex; justify-content: center;">
     <div class="card " style="width: 60%;">
       <img src="{{proyecto.imagen.url}}" class="card-img-top" alt="..." style="width:100%; height:80%;">
       <div class="card-body">
@@ -13,6 +13,42 @@
       </div>
     </div>
   </div>
+   {% endcomment %}
+
+   <h2>{{ proyecto.nombre }}</h2>
+    <p>{{ proyecto.descripcion|linebreaksbr }}</p>
+    <img src="{{ proyecto.imagen.url }}" alt="{{ proyecto.nombre }}" class="img-fluid mb-3">
+
+
+  <h3 class="text-center">Galería de Imágenes</h3>
+    {% if proyecto.imagenes_proyecto.all|length > 0 %}
+        <div id="proyectoCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                {% for imagen in proyecto.imagenes_proyecto.all %}
+                    <button type="button" data-bs-target="#proyectoCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
+                {% endfor %}
+            </div>
+            <div class="carousel-inner">
+                {% for imagen in proyecto.imagenes_proyecto.all %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{{ imagen.imagen.url }}" class="d-block w-100" alt="{{ imagen.alt_text|default:proyecto.nombre }}">
+                    </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#proyectoCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#proyectoCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+    {% else %}
+        <p>No hay imágenes adicionales para este proyecto.</p>
+    {% endif %}
+  
+
 <h2 class="text-center">Tecnologias</h2>
 <div class="tecnologia mt-2 mb-5 center" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
     {% for tecnologia in proyecto.tecnologias.all %}
