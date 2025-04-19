@@ -1,10 +1,23 @@
 from django.shortcuts import render, get_object_or_404
 # from django.contrib import messages
-from .models import Proyectos, Tecnologias
+from .models import Proyectos, Tecnologias, Redes, SobreMi
 
 
 def sobre_mi(request):
-    return render(request, 'portafolio/sobremi.html')
+    sobre_mi = get_object_or_404(SobreMi, id=1) 
+    redes = Redes.objects.all()
+    context = {
+        'sobre_mi': sobre_mi,
+        'redes': redes,
+    }
+    return render(request, 'portafolio/sobremi.html', context)
+
+def contacto(request):
+    redes = Redes.objects.all()
+    context = {
+        'redes': redes,
+    }
+    return render(request, 'contactos/contactos.html',context)
 
 def home(request):
     proyectos = Proyectos.objects.all()

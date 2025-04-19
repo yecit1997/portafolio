@@ -50,7 +50,12 @@ class ImagenProyecto(models.Model):
 class Redes(models.Model):
     nombre = models.CharField(max_length=50)
     url = models.URLField()
-    icono = models.ImageField(upload_to='redes')
+    icono_bootstrap = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        verbose_name='Icono (Bootstrap Class)'
+    )
 
     class Meta:
         verbose_name = 'Red'
@@ -63,7 +68,7 @@ class Redes(models.Model):
 class SobreMi(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.TextField()
-    imagen = models.ImageField(upload_to='sobre_mi')
+    imagen = models.ImageField(upload_to='sobre_mi', blank=True, null=True)
     redes = models.ManyToManyField(Redes, related_name='redes', blank=True)
 
     class Meta:

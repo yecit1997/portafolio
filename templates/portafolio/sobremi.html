@@ -1,15 +1,11 @@
 {% extends 'core/base.html' %}
 {% load static %}
 {% block content %}
+  <div class="container">
+    <h1 class="text-center text-sm-center mt-5 mb-5">Sobre mi</h1>
+    <h4 class="mt-3 mb-3"><b>{{ sobre_mi.nombre }}</b></h4>
+    <p>{{ sobre_mi.descripcion|linebreaksbr }}</p>
 
-<div class="container">
-
-<h1 class="text-center text-sm-center">Sobre mi</h1>
-
-<p>Hola, soy un desarrollador web apasionado por la tecnología y el aprendizaje continuo. Me encanta crear aplicaciones web que sean funcionales y atractivas para los usuarios.</p>
-<p>En mi tiempo libre, disfruto de la lectura, la música y explorar nuevas tecnologías. Siempre estoy buscando nuevos desafíos y oportunidades para crecer profesionalmente.</p>
-
-    {% include 'contactos/contactos.html' %}
-</div>
-
+    {% include 'contactos/contactos.html' with redes=redes %}
+  </div>
 {% endblock %}

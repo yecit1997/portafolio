@@ -1,13 +1,16 @@
+{% load static %}
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-opacity-10 bg-gradient mb-2">
-    <div class="container-fluid">
+  <div class="container-fluid">
       <a class="navbar-brand" href="{% url 'home' %}">Portafolio</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav ms-auto">
-          <a class="nav-link active" aria-current="page" href="{% url 'sobremi' %}">Sobre mi</a> 
-        </div>
+          <div class="navbar-nav ms-auto">
+              <a class="nav-link active" aria-current="page" href="{% url 'sobremi' %}">Sobre mi</a>
+              <div class="vr text-white mx-2"></div> <a class="nav-link active" aria-current="page" href="{% static 'pdf/cv/Hoja_Vida_Actual.pdf' %}"><i class="bi bi-download"></i> CV</a>
+          </div>
       </div>
-    </div>
-  </nav>
+  </div>
+</nav>
