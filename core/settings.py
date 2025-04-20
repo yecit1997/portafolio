@@ -154,4 +154,9 @@ MEDIA_URL = "/media/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", default="localhost").split(",")
-ALLOWED_HOSTS = ['*',"localhost","web-production-0f15b.up.railway.app"]
+ALLOWED_HOSTS = ["*", "localhost", "web-production-0f15b.up.railway.app"]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://web-production-0f15b.up.railway.app",
+    "http://*",
+]
