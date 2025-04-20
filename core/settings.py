@@ -145,4 +145,4 @@ MEDIA_URL = "/media/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-ALLOWED_HOSTS = ["https://web-production-0f15b.up.railway.app/"]
+ALLOWED_HOSTS = ["web-production-0f15b.up.railway.app"]
