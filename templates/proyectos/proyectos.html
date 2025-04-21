@@ -8,10 +8,6 @@
 
   <div class="container mb-5 mt-5">
     <div class="card-container">
-      
-      {% if proyectos %}
-        
-      
       {% for proyecto in proyectos %}
       <div class="card">
         <img src=" {{proyecto.imagen.url}} " class="card-img-top img-fluid" alt="..."  style="width:100%; height:300px;"/>
@@ -28,7 +24,6 @@
         No hay proyectos disponibles.
       </div>
       {% endfor %}
-      {% endif %}
     </div>
   </div>
   
