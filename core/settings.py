@@ -41,7 +41,6 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    "rest_framework",
     "whitenoise.runserver_nostatic",
 ]
 
@@ -96,7 +95,6 @@ DATABASES = {
     "default": dj_database_url.config(default=os.getenv("DATABASE_URL"))
     }
 
-print("DATABASE_URL", os.getenv("DATABASE_URL"))
 
 
 # Password validation
