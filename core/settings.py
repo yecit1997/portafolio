@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG")
 
-# ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -46,7 +46,7 @@ THIRD_PARTY_APPS = [
 
 # APPS que creamos en el proyecto
 LOCAL_APPS = [
-    "portafolio",
+    "apps.portafolio",
 ]
 
 """
@@ -162,7 +162,7 @@ MEDIA_URL = "/media/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", default="localhost").split(",")
-ALLOWED_HOSTS = ["*", "localhost", "web-production-0f15b.up.railway.app"]
+ALLOWED_HOSTS = ["*", "localhost"]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://web-production-0f15b.up.railway.app",
