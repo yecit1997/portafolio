@@ -167,5 +167,5 @@ ALLOWED_HOSTS.append("https://yecit1997.pythonanywhere.com/")
 CSRF_TRUSTED_ORIGINS = [
     "https://web-production-0f15b.up.railway.app",
     "http://*",
-    "https://yecit1997.pythonanywhere.com/"
+    "yecit1997.pythonanywhere.com/"
 ]
