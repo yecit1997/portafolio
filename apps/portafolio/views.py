@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 # from django.contrib import messages
 from .models import Proyectos, Tecnologias, Redes, SobreMi
-
+from core.paginador import paginador
 
 def sobre_mi(request):
     sobre_mi = get_object_or_404(SobreMi, id=1) 
@@ -21,6 +21,7 @@ def contacto(request):
 
 def home(request):
     proyectos = Proyectos.objects.all()
+    proyectos = paginador(proyectos, request)
     tecnologias = Tecnologias.objects.all()
     
     context = {

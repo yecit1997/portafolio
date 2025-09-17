@@ -29,7 +29,7 @@ class Proyectos(models.Model):
     def tecnologias_list(self):
         return ", ".join([tecnologia.nombre for tecnologia in self.tecnologias.all()])
 
-    tecnologias_list.short_description = 'Tecnologías'
+    tecnologias_list.short_description = 'Tecnologías' # type: ignore
     
 
 # Guardar las imágenes en una carpeta específica dentro de 'galeria_proyectos'
