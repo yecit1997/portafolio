@@ -1,48 +1,54 @@
 from django.shortcuts import render, get_object_or_404
+
 # from django.contrib import messages
 from .models import Proyectos, Tecnologias, Redes, SobreMi
 from core.paginador import paginador
 
+
 def sobre_mi(request):
-    sobre_mi = get_object_or_404(SobreMi, id=1) 
+    sobre_mi = get_object_or_404(SobreMi, id=1)
     redes = Redes.objects.all()
     context = {
-        'sobre_mi': sobre_mi,
-        'redes': redes,
+        "sobre_mi": sobre_mi,
+        "redes": redes,
     }
-    return render(request, 'portafolio/sobremi.html', context)
+    return render(request, "portafolio/sobremi.html", context)
+
 
 def contacto(request):
     redes = Redes.objects.all()
     context = {
-        'redes': redes,
+        "redes": redes,
     }
-    return render(request, 'contactos/contactos.html',context)
+    return render(request, "contactos/contactos.html", context)
+
 
 def home(request):
     proyectos = Proyectos.objects.all()
+    total_proyectos = proyectos.count()
     proyectos = paginador(proyectos, request)
     tecnologias = Tecnologias.objects.all()
-    
+
     context = {
-        'proyectos': proyectos,
-        'tecnologias': tecnologias,
+        "proyectos": proyectos,
+        "tecnologias": tecnologias,
+        "total_proyectos": total_proyectos,
     }
-    return render(request, 'portafolio/index.html',context=context)
+    return render(request, "portafolio/index.html", context=context)
 
 
 def proyectos(request):
-    return render(request, 'proyectos/proyectos.html',)
+    return render(
+        request,
+        "proyectos/proyectos.html",
+    )
 
 
 def ver_proyecto(request, proyecto_id):
     proyecto = get_object_or_404(Proyectos, id=proyecto_id)
     tecnologia = Tecnologias.objects.filter(proyectos=proyecto)
     context = {
-        'proyecto': proyecto,
-        'tecnologia': tecnologia,
+        "proyecto": proyecto,
+        "tecnologia": tecnologia,
     }
-    return render(request, 'proyectos/ver_proyecto.html', context=context)
-
-
-
+    return render(request, "proyectos/ver_proyecto.html", context=context)

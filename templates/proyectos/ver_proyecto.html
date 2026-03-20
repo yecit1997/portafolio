@@ -1,52 +1,109 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
-{% block title %}Detalle{% endblock title %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/ver_proyecto.css' %}" />
+{% endblock %}
+
 {% block content %}
-    
-
-
-  <h2>{{ proyecto.nombre }}</h2>
-  <p class="mb-5 mt-4">{{ proyecto.descripcion|linebreaksbr }}</p>
-    {% comment %} <img src="{{ proyecto.imagen.url }}" alt="{{ proyecto.nombre }}" class="img-fluid mb-3"> {% endcomment %}
-
-
-    {% if proyecto.imagenes_proyecto.all|length > 0 %}
-        <div id="proyectoCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                {% for imagen in proyecto.imagenes_proyecto.all %}
-                    <button type="button" data-bs-target="#proyectoCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
-                {% endfor %}
-            </div>
-            <div class="carousel-inner">
-                {% for imagen in proyecto.imagenes_proyecto.all %}
-                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                        <img src="{{ imagen.imagen.url }}" class="d-block w-100" alt="{{ imagen.alt_text|default:proyecto.nombre }}">
+<section class="project-detail">
+    <div class="container-custom">
+        <nav class="breadcrumb-nav">
+            <a href="{% url 'home' %}">
+                <i class="bi bi-house"></i> Inicio
+            </a>
+            <i class="bi bi-chevron-right"></i>
+            <span>{{ proyecto.nombre }}</span>
+        </nav>
+        
+        <div class="project-grid">
+            <div class="project-main fade-in">
+                {% if proyecto.imagenes_proyecto.all %}
+                <div class="project-carousel">
+                    <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            {% for imagen in proyecto.imagenes_proyecto.all %}
+                            <button type="button" data-bs-target="#projectCarousel" 
+                                data-bs-slide-to="{{ forloop.counter0 }}" 
+                                {% if forloop.first %}class="active" aria-current="true"{% endif %}
+                                aria-label="Slide {{ forloop.counter }}">
+                            </button>
+                            {% endfor %}
+                        </div>
+                        <div class="carousel-inner">
+                            {% for imagen in proyecto.imagenes_proyecto.all %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <img src="{{ imagen.imagen.url }}" alt="{{ imagen.alt_text|default:proyecto.nombre }}" />
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% if proyecto.imagenes_proyecto.count > 1 %}
+                        <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
+                            <span class="carousel-arrow"><i class="bi bi-chevron-left"></i></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
+                            <span class="carousel-arrow"><i class="bi bi-chevron-right"></i></span>
+                        </button>
+                        {% endif %}
                     </div>
-                {% endfor %}
+                </div>
+                {% endif %}
+                
+                <div class="project-info">
+                    <h1 class="project-title">{{ proyecto.nombre }}</h1>
+                    <div class="project-description">
+                        {{ proyecto.descripcion|linebreaksbr }}
+                    </div>
+                </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#proyectoCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Anterior</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#proyectoCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Siguiente</span>
-            </button>
+            
+            <aside class="project-sidebar fade-in" style="animation-delay: 0.2s">
+                <div class="sidebar-card glass-card">
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">
+                            <i class="bi bi-stack"></i>
+                            Tecnologías
+                        </h3>
+                        <div class="tech-list">
+                            {% for tecnologia in proyecto.tecnologias.all %}
+                            <div class="tech-item">
+                                <img src="{{ tecnologia.imagen.url }}" alt="{{ tecnologia.nombre }}" />
+                                <span>{{ tecnologia.nombre }}</span>
+                            </div>
+                            {% empty %}
+                            <p class="no-tech">Sin tecnologías especificadas</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="sidebar-divider"></div>
+                    
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">
+                            <i class="bi bi-info-circle"></i>
+                            Detalles
+                        </h3>
+                        <ul class="details-list">
+                            <li>
+                                <span class="detail-label">Categoría</span>
+                                <span class="detail-value">Backend</span>
+                            </li>
+                            <li>
+                                <span class="detail-label">Imágenes</span>
+                                <span class="detail-value">{{ proyecto.imagenes_proyecto.count }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sidebar-divider"></div>
+                    
+                    <a href="{% url 'home' %}#proyectos" class="btn-back">
+                        <i class="bi bi-arrow-left"></i>
+                        Volver a proyectos
+                    </a>
+                </div>
+            </aside>
         </div>
-    {% else %}
-        <p>No hay imágenes adicionales para este proyecto.</p>
-    {% endif %}
-  
-
-<h2 class="text-center mt-5">Tecnologias</h2>
-<div class="tecnologia mt-2 mb-5 center" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
-    {% for tecnologia in proyecto.tecnologias.all %}
-        <div class="image-container mx-2 my-2">
-            <img class="img-fluid rounded" src="{{tecnologia.imagen.url}}" style="width:30px; height:30px;" alt="tecnología"/>
-        </div>
-    {% endfor %}
-</div>
-
-{% endblock content %}
-  
+    </div>
+</section>
+{% endblock %}

@@ -1,17 +1,189 @@
 {% extends 'core/base.html' %}
 {% load static %}
+
 {% block style %}
-  <link rel="stylesheet" href=" {% static 'css/Proyectos.css' %} " />
+<link rel="stylesheet" href="{% static 'css/index.css' %}" />
 {% endblock %}
 
-
 {% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-bg">
+        <div class="hero-grid"></div>
+        <div class="hero-glow"></div>
+    </div>
+    <div class="container-custom">
+        <div class="hero-content">
+            <div class="hero-badge fade-in">
+                <span class="badge-dot"></span>
+                Disponible para proyectos
+            </div>
+            <h1 class="hero-title fade-in" style="animation-delay: 0.1s">
+                Hola, soy <span class="text-gradient">Yecit Torres</span>
+            </h1>
+            <div class="hero-role fade-in" style="animation-delay: 0.2s">
+                <span class="role-prefix">$</span>
+                <span class="role-text">Desarrollador Backend</span>
+                <span class="cursor-blink">_</span>
+            </div>
+            <p class="hero-description fade-in" style="animation-delay: 0.3s">
+                Especializado en construir APIs robustas, sistemas escalables y soluciones 
+                eficientes con Python, Django y bases de datos. Transformo requisitos 
+                técnicos en arquitectura de software solida.
+            </p>
+            <div class="hero-cta fade-in" style="animation-delay: 0.4s">
+                <a href="#proyectos" class="btn-primary-custom">
+                    <i class="bi bi-folder"></i>
+                    Ver proyectos
+                </a>
+                <a href="{% url 'sobremi' %}" class="btn-outline-custom">
+                    <i class="bi bi-person"></i>
+                    Sobre mí
+                </a>
+            </div>
+            <div class="hero-stats fade-in" style="animation-delay: 0.5s">
+                <div class="stat">
+                    <span class="stat-number">{{ total_proyectos }}</span>
+                    <span class="stat-label">Proyectos</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number">{{ tecnologias|length }}</span>
+                    <span class="stat-label">Tecnologías</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number">APIs</span>
+                    <span class="stat-label">Integradas</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual fade-in" style="animation-delay: 0.3s">
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">backend.py</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="code-line"><span class="code-keyword">class</span> <span class="code-class">Developer</span>:</div>
+                    <div class="code-line code-indent-1"><span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-param">self</span>):</div>
+                    <div class="code-line code-indent-2"><span class="code-variable">self</span>.name = <span class="code-string">"Yecit Torres"</span></div>
+                    <div class="code-line code-indent-2"><span class="code-variable">self</span>.role = <span class="code-string">"Backend Dev"</span></div>
+                    <div class="code-line code-indent-2"><span class="code-variable">self</span>.skills = [</div>
+                    <div class="code-line code-indent-3"><span class="code-string">"Django"</span>,</div>
+                    <div class="code-line code-indent-3"><span class="code-string">"Python"</span>,</div>
+                    <div class="code-line code-indent-3"><span class="code-string">"APIs REST"</span>,</div>
+                    <div class="code-line code-indent-3"><span class="code-string">"PostgreSQL"</span></div>
+                    <div class="code-line code-indent-2">]</div>
+                    <div class="code-line code-indent-1"></div>
+                    <div class="code-line code-indent-1"><span class="code-keyword">def</span> <span class="code-function">build</span>(<span class="code-param">self</span>):</div>
+                    <div class="code-line code-indent-2"><span class="code-keyword">return</span> <span class="code-string">"Awesome Software"</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-{% include 'proyectos/proyectos.html' with proyectos=proyectos tecnologias=tecnologias%}
-{% include 'tecnologias/tecnologias.html' %}
+<!-- Proyectos Section -->
+<section class="section proyectos-section" id="proyectos">
+    <div class="container-custom">
+        <div class="section-header">
+            <h2 class="section-title">Proyectos Destacados</h2>
+            <p class="section-subtitle">Una selección de proyectos que demuestran mi experiencia en desarrollo backend y arquitectura de sistemas.</p>
+        </div>
+        
+        <div class="proyectos-grid">
+            {% for proyecto in proyectos %}
+            <article class="proyecto-card glass-card fade-in" onclick="location.href='{% url 'ver_proyecto' proyecto.id %}'">
+                <div class="proyecto-image">
+                    <img src="{{ proyecto.imagen.url }}" alt="{{ proyecto.nombre }}" loading="lazy" />
+                    <div class="proyecto-overlay">
+                        <span class="proyecto-view">
+                            <i class="bi bi-arrow-up-right"></i>
+                            Ver detalles
+                        </span>
+                    </div>
+                </div>
+                <div class="proyecto-content">
+                    <h3 class="proyecto-title">{{ proyecto.nombre }}</h3>
+                    <p class="proyecto-description">{{ proyecto.descripcion|truncatewords:25|linebreaksbr }}</p>
+                    <div class="proyecto-tech">
+                        {% for tecnologia in proyecto.tecnologias.all|slice:":4" %}
+                            <span class="badge-tech">{{ tecnologia.nombre }}</span>
+                        {% endfor %}
+                        {% if proyecto.tecnologias.count > 4 %}
+                            <span class="badge-tech">+{{ proyecto.tecnologias.count|add:"-4" }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </article>
+            {% empty %}
+            <div class="empty-state">
+                <i class="bi bi-folder-x"></i>
+                <p>Próximamente nuevos proyectos...</p>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {% if proyectos.has_other_pages %}
+        <div class="pagination-custom">
+            {% if proyectos.has_previous %}
+                <a href="?page={{ proyectos.previous_page_number }}" class="pagination-btn">
+                    <i class="bi bi-chevron-left"></i>
+                    Anterior
+                </a>
+            {% endif %}
+            <span class="pagination-info">
+                Página {{ proyectos.number }} de {{ proyectos.paginator.num_pages }}
+            </span>
+            {% if proyectos.has_next %}
+                <a href="?page={{ proyectos.next_page_number }}" class="pagination-btn">
+                    Siguiente
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</section>
 
+<!-- Tecnologias Section -->
+<section class="section tech-section" id="tecnologias">
+    <div class="container-custom">
+        <div class="section-header">
+            <h2 class="section-title">Tech Stack</h2>
+            <p class="section-subtitle">Tecnologías y herramientas que utilizo para crear soluciones backend robustas.</p>
+        </div>
+        
+        <div class="tech-grid">
+            {% for tecnologia in tecnologias %}
+            <div class="tech-card glass-card fade-in" title="{{ tecnologia.nombre }}">
+                <img src="{{ tecnologia.imagen.url }}" alt="{{ tecnologia.nombre }}" loading="lazy" />
+                <span class="tech-name">{{ tecnologia.nombre }}</span>
+            </div>
+            {% empty %}
+            <div class="empty-state">
+                <i class="bi bi-stack"></i>
+                <p>Tecnologías en construcción...</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
 
-{% endblock content %}
-    
-
-
+<!-- CTA Section -->
+<section class="section cta-section">
+    <div class="container-custom">
+        <div class="cta-content">
+            <h2 class="cta-title">¿Tienes un proyecto en mente?</h2>
+            <p class="cta-text">Estoy siempre abierto a nuevos desafíos y oportunidades de colaboración.</p>
+            <a href="{% url 'sobremi' %}" class="btn-primary-custom">
+                <i class="bi bi-chat-dots"></i>
+                Hablemos
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

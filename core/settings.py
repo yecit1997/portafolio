@@ -80,6 +80,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "core.context_processors.redes_context",
             ],
         },
     },
@@ -167,5 +168,5 @@ ALLOWED_HOSTS.append("https://yecit1997.pythonanywhere.com/")
 CSRF_TRUSTED_ORIGINS = [
     "https://web-production-0f15b.up.railway.app",
     "http://*",
-    "http://yecit1997.pythonanywhere.com/"
+    "http://yecit1997.pythonanywhere.com/",
 ]
